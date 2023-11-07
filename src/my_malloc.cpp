@@ -109,23 +109,6 @@ void find_free(size_t size, node_t **found, node_t **previous) {
 //
 // RETURNS:
 // allocated - an allocated block to be returned to the calling program
-//
-// void split(size_t size, node_t **previous, node_t **free_block,
-//            header_t **allocated) {
-//   assert(*free_block != NULL);
-//   // TODO
-//   size_t totalSize = size + sizeof(header_t);
-//   *allocated = (header_t*)free_block;
-//   *free_block = (node_t*)(((char*)*free_block)+totalSize);
-//   (*free_block)->size = (*free_block)->size - totalSize; 
-//   if(*previous == NULL){
-//     head = *free_block;
-//   }else{
-//     (*previous)->next = *free_block;
-//   }
-//   (*allocated)->size = size; 
-//   (*allocated)->magic = MAGIC;
-// }
 
 void split(size_t size, node_t **previous, node_t **free_block,
            header_t **allocated) {
@@ -146,10 +129,6 @@ void split(size_t size, node_t **previous, node_t **free_block,
   (*allocated)->size = size; 
   (*allocated)->magic = MAGIC;
 }
-// void split(size_t size, node_t **previous, node_t **free_block,
-//            header_t **allocated) {
-//     *free_block->size = *free_bl
-//   }
 // Returns a pointer to a region of memory having at least the request `size`
 // bytes.
 //
@@ -195,14 +174,6 @@ void coalesce(node_t *free_block) {
     }
     cur = cur->next;
     block_size = free_block->size + sizeof(node_t);
-    // block_size = cur->next->size + sizeof(node_t);
-    // if ((node_t*)(((char*)cur) + block_size) == cur->next){
-    //   free_block = (node_t*)(((char*)free_block)+block_size);
-    //   cur->size = cur->size + cur->next->size;
-    //   cur->next = cur->next->next;
-    // }else{
-    //   break;
-    // }
   }
 }
 
